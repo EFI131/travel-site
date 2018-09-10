@@ -1,24 +1,16 @@
-var gulp = require("gulp");
-const browsersync = require("browser-sync").create();
+var gulp = require('gulp');
+const browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
-function browserSync(done) {
-    browsersync.init({
+gulp.task('serve', function (done) {
+    browserSync({
         server: {
-            baseDir: "./app"
-        },
-        port: 3000
+            baseDir: 'app'
+        }
     });
+    // reload browser after changes in index.html
+    gulp.watch("./app/index.html", reload);
+    // and .css
+    gulp.watch("./app/assets/styles/**/*.css", gulp.series('styles'));
     done();
-}
-
-// BrowserSync Reload
-function browserSyncReload(done) {
-    browsersync.reload();
-    done();
-}
-
-gulp.task("watch", function (done) {
-    gulp.watch("./app/index.html", browserSyncReload);
-    gulp.watch("./app/assets/styles/**/*.css", gulp.series("styles", browserSyncReload));
-    browserSync(done);
 });

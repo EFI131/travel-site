@@ -6,28 +6,11 @@ var nested = require("postcss-nested");
 var cssImport = require("postcss-import");
 var mixins = require('postcss-mixins');
 
-const browsersync = require("browser-sync").create();
+const browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
 
-function browserSync(done) {
-    browsersync.init({
-        server: {
-            baseDir: "./app"
-        },
-        port: 3000
-    });
-    done();
-}
-
-// BrowserSync Reload
-function browserSyncReload(done) {
-    browsersync.reload();
-    done();
-}
-
-
-
-gulp.task("styles", function () {
+gulp.task('styles', function () {
     return gulp
         .src("./app/assets/styles/styles.css")
         .pipe(postcss([cssImport, mixins, cssvars, nested, autoprefixer]))
@@ -36,5 +19,7 @@ gulp.task("styles", function () {
             this.emit('end');
         })
         .pipe(gulp.dest("./app/temp/styles"))
-        .pipe(browsersync.stream());
+        .pipe(reload({
+            stream: true
+        }));
 });
