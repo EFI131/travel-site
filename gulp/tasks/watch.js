@@ -1,13 +1,12 @@
 var gulp = require('gulp');
-var postcss = require("gulp-postcss");
-var autoprefixer = require("autoprefixer");
-var cssvars = require("postcss-simple-vars");
-var nested = require("postcss-nested");
-var cssImport = require("postcss-import");
-var mixins = require('postcss-mixins');
 const browserSync = require('browser-sync').create();
 
-gulp.task('serve', function (done) {
+gulp.task('scriptsRefresh', gulp.series('scripts', function (done) {
+    browserSync.reload();
+    done();
+}));
+
+gulp.task('watch', function (done) {
     browserSync.init({
         server: {
             baseDir: 'app'
@@ -15,7 +14,13 @@ gulp.task('serve', function (done) {
     });
 
     // reload browser after changes in index.html
-    gulp.watch("./app/assets/styles/**/*.css", gulp.series('styles'));
+    gulp.watch("./app/assets/styles/**/*.css", gulp.series('styles', function () {
+        return gulp.src('./app/temp/styles/styles.css')
+            .pipe(browserSync.stream());
+    }));
+
     gulp.watch("./app/index.html", gulp.series('styles')).on('change', browserSync.reload);
+
+    gulp.watch('./app/assets/scripts/**/*.js', gulp.series('scriptsRefresh'));
     done();
 });

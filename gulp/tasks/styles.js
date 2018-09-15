@@ -6,7 +6,6 @@ var nested = require("postcss-nested");
 var cssImport = require("postcss-import");
 var mixins = require('postcss-mixins');
 var hexrgba = require('postcss-hexrgba');
-const browserSync = require('browser-sync').create();
 
 gulp.task('styles', function () {
     return gulp
@@ -16,8 +15,5 @@ gulp.task('styles', function () {
             console.log(errorInfo.toString());
             this.emit('end');
         })
-        .pipe(gulp.dest("./app/temp/styles"))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+        .pipe(gulp.dest("./app/temp/styles"));
 });
