@@ -17,15 +17,15 @@
     margin-right: -45px;
   }
 
-  &--gutters>div {
+  &--gutters > div {
     padding-right: 65px;
   }
 
-  &--gutters-large>div {
+  &--gutters-large > div {
     padding-right: 100px;
   }
 
-  &--gutters-small>div {
+  &--gutters-small > div {
     padding-right: 45px;
   }
 
@@ -92,23 +92,23 @@
   }
 
   /* Begin equal height rules */
-  &--equal-height-at-meduim {
+  .flexbox &--equal-height-at-meduim {
     @mixin atMedium {
       display: flex;
     }
 
-    &>div {
+    & > div {
       float: none;
       display: flex;
     }
   }
 
-  &--equal-height-at-large {
+  .flexbox &--equal-height-at-large {
     @mixin atLarge {
       display: flex;
     }
 
-    &>div {
+    & > div {
       float: none;
       display: flex;
     }
