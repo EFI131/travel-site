@@ -660,12 +660,20 @@ a {
     }
 .generic-content-container p {
     line-height: 1.65;
-    margin: 0 0 1.8rem 0;
+    margin: 0;
     font-weight: 300;
+    margin: 0 0.5rem 1.8rem 0.5rem;
+    padding: 0 0.3rem 0 0.3rem;
   }
 @media (min-width: 530px) {
 .generic-content-container p {
       font-size: 1.175rem
+  }
+    }
+@media (min-width: 768px) {
+.generic-content-container p {
+      padding: 0;
+      margin: 0 0 1.8rem 0
   }
     }
 .generic-content-container p a {
